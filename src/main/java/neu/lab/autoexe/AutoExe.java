@@ -14,16 +14,14 @@ import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 
 public abstract class AutoExe {
-	public String baseDir = "D:\\ws\\gitHub_old\\";
-
 	public FileSyn donePjct;// project has done;
-	public FileSyn mvnExpPjt;//  project that throws exception when executes maven command
+	public FileSyn mvnExpPjt;// project that throws exception when executes maven command
 	public FileSyn noCnflictPjct;// record project that hasn't conflict
 
 	protected void readState() throws IOException {
-		donePjct = new FileSyn(getStateDir(),"Project_done.txt");
-		mvnExpPjt = new FileSyn(getStateDir(),"Project_throw_error.txt");
-		noCnflictPjct = new FileSyn(getStateDir(),"Project_no_conflict.txt");
+		donePjct = new FileSyn(getStateDir(), "Project_done.txt");
+		mvnExpPjt = new FileSyn(getStateDir(), "Project_throw_error.txt");
+		noCnflictPjct = new FileSyn(getStateDir(), "Project_no_conflict.txt");
 	}
 
 	protected abstract String getStateDir();
@@ -36,7 +34,7 @@ public abstract class AutoExe {
 
 	public void autoExe() throws IOException {
 		readState();
-		File baseFile = new File(baseDir);
+		File baseFile = new File(getProjectDir());
 		List<String> pomDirs = findPomPaths(baseFile);
 		for (String pomPath : pomDirs) {
 			String projectName = path2name(pomPath);
@@ -50,6 +48,8 @@ public abstract class AutoExe {
 		}
 		writeState();
 	}
+
+	protected abstract String getProjectDir();
 
 	private void execOnce(String pomPath) {
 		try {
@@ -67,7 +67,7 @@ public abstract class AutoExe {
 
 	private String path2name(String path) {
 		// D:\test_apache\simple\commons-logging-1.2-src
-		return path.replace(baseDir, "");
+		return path.replace(Conf.staProjectDir, "");
 	}
 
 	private boolean isSingle(File pomFile) {

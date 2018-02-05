@@ -14,4 +14,9 @@ public class AutoExeDetect extends AutoExe {
 		return "D:\\ws\\state_detect\\";
 	}
 
+	@Override
+	protected String getProjectDir() {
+		return Conf.detectProjectDir;
+	}
+
 }
