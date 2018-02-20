@@ -66,7 +66,7 @@ public abstract class AutoExe {
 			executor.execute(cmdLine);
 		} catch (Exception e) {
 			e.printStackTrace();
-			mvnExpPjt.add(pomPath);
+			mvnExpPjt.add(path2name(pomPath));
 		}
 	}
 
