@@ -1,6 +1,8 @@
 package neu.lab.autoexe;
 
-public class AutoExeDetect extends AutoExe {
+import neu.lab.autoexe.entrance.AutoExeEntrance;
+
+public class AutoDetect extends AutoExe {
 	public String getBatPath() {
 		return "D:\\ws\\detect.bat";
 	}
@@ -16,7 +18,7 @@ public class AutoExeDetect extends AutoExe {
 
 	@Override
 	protected String getProjectDir() {
-		return Conf.detectProjectDir;
+		return AutoExeEntrance.detectProjectDir;
 	}
 
 }

@@ -13,6 +13,8 @@ import java.util.List;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 
+import neu.lab.autoexe.entrance.AutoExeEntrance;
+
 public abstract class AutoExe {
 	public FileSyn donePjct;// project has done;
 	public FileSyn mvnExpPjt;// project that throws exception when executes maven command
@@ -34,8 +36,7 @@ public abstract class AutoExe {
 
 	public void autoExe() throws IOException {
 		readState();
-		File baseFile = new File(getProjectDir());
-		List<String> pomDirs = findPomPaths(baseFile);
+		List<String> pomDirs = getPomDirs();
 		for (String pomPath : pomDirs) {
 			String projectName = path2name(pomPath);
 			if (!donePjct.contains(projectName) && !mvnExpPjt.contains(projectName)
@@ -47,6 +48,10 @@ public abstract class AutoExe {
 			}
 		}
 		writeState();
+	}
+
+	protected List<String> getPomDirs() {
+		return findPomPaths(new File(getProjectDir()));
 	}
 
 	protected abstract String getProjectDir();
@@ -67,7 +72,7 @@ public abstract class AutoExe {
 
 	private String path2name(String path) {
 		// D:\test_apache\simple\commons-logging-1.2-src
-		return path.replace(Conf.staProjectDir, "");
+		return path.replace(AutoExeEntrance.staProjectDir, "");
 	}
 
 	private boolean isSingle(File pomFile) {
@@ -104,7 +109,7 @@ public abstract class AutoExe {
 		return pomPaths;
 	}
 
-	private void writeBat(String pomPath) throws IOException {
+	protected void writeBat(String pomPath) throws IOException {
 		PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(getBatPath())));
 		printer.println("cd " + pomPath);
 		// printer.println("mvn -Dmaven.test.skip=true package
