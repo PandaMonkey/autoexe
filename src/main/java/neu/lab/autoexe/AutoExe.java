@@ -37,6 +37,8 @@ public abstract class AutoExe {
 	public void autoExe() throws IOException {
 		readState();
 		List<String> pomDirs = getPomDirs();
+		int allTask = pomDirs.size();
+		int completeSize = 0;
 		for (String pomPath : pomDirs) {
 			String projectName = path2name(pomPath);
 			if (!donePjct.contains(projectName) && !mvnExpPjt.contains(projectName)
@@ -46,6 +48,8 @@ public abstract class AutoExe {
 			} else {
 				System.out.println("skip project:" + pomPath);
 			}
+			completeSize++;
+			System.out.println("complete/all: " + completeSize + "/" + allTask);
 		}
 		writeState();
 	}
