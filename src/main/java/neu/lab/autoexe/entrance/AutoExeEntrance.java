@@ -2,6 +2,7 @@ package neu.lab.autoexe.entrance;
 
 import java.io.IOException;
 
+import neu.lab.autoexe.AutoDebug;
 import neu.lab.autoexe.AutoUpVer;
 
 public class AutoExeEntrance {
@@ -13,7 +14,7 @@ public class AutoExeEntrance {
 	public static final String debugDir = "D:\\ws\\solvebug\\ignite-master";
 
 	public static void main(String[] args) throws IOException {
-		new AutoUpVer().autoExe();
+		new AutoDebug().autoExe();
 	}
 
 }

@@ -13,11 +13,11 @@ public class AutoDebug extends AutoExe {
 
 	@Override
 	protected String getStateDir() {
-		return "D:\\ws\\state_denug\\";
+		return "D:\\ws\\state_debug\\";
 	}
 
 	@Override
 	protected String getProjectDir() {
-		return AutoExeEntrance.detectProjectDir;
+		return AutoExeEntrance.debugDir;
 	}
 }
